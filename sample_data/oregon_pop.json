@@ -1,0 +1,87 @@
+{
+    "title": "Oregon Cities by Population",
+    "description": "The 20 most populated cities in oregon sorted from highest to lowest by population in 2026",
+    "items": [
+        {
+            "name": "Portland",
+            "order": 1
+        },
+        {
+            "name": "Salem",
+            "order": 2
+        },
+        {
+            "name": "Eugene",
+            "order": 3
+        },
+        {
+            "name": "Hillsboro",
+            "order": 4
+        },
+        {
+            "name": "Bend",
+            "order": 5
+        },
+        {
+            "name": "Gresham",
+            "order": 6
+        },
+        {
+            "name": "Beaverton",
+            "order": 7
+        },
+        {
+            "name": "Medford",
+            "order": 8
+        },
+        {
+            "name": "Corvallis",
+            "order": 9
+        },
+        {
+            "name": "Springfield",
+            "order": 10
+        },
+        {
+            "name": "Tigard",
+            "order": 11
+        },
+        {
+            "name": "Albany",
+            "order": 12
+        },
+        {
+            "name": "Aloha",
+            "order": 13
+        },
+        {
+            "name": "Lake Oswego",
+            "order": 14
+        },
+        {
+            "name": "Grants Pass",
+            "order": 15
+        },
+        {
+            "name": "Redmond",
+            "order": 16
+        },
+        {
+            "name": "Keizer",
+            "order": 17
+        },
+        {
+            "name": "Oregon City",
+            "order": 18
+        },
+        {
+            "name": "McMinnville",
+            "order": 19
+        },
+        {
+            "name": "Bethany",
+            "order": 20
+        }
+
+    ]
+}
