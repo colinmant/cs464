@@ -1,275 +1,123 @@
 {
-    "title": "Fish",
-    "Description": "Fish that live in Central Oregon ordered by length",
     "items": [
         {
             "name": "Brook Stickleback",
-            "scientific_name": "Culaea inconstans",
-            "average_length_cm": 4,
-            "native": true,
-            "type": "stickleback",
-            "habitat": "streams and ponds",
             "order": 1
         },
         {
             "name": "Speckled Dace",
-            "scientific_name": "Rhinichthys osculus",
-            "average_length_cm": 7,
-            "native": true,
-            "type": "minnow",
-            "habitat": "rivers and streams",
             "order": 2
         },
         {
             "name": "Fathead Minnow",
-            "scientific_name": "Pimephales promelas",
-            "average_length_cm": 8,
-            "native": false,
-            "type": "minnow",
-            "habitat": "ponds and slow streams",
             "order": 3
         },
         {
             "name": "Longnose Dace",
-            "scientific_name": "Rhinichthys cataractae",
-            "average_length_cm": 10,
-            "native": true,
-            "type": "minnow",
-            "habitat": "fast rocky streams",
             "order": 4
         },
         {
             "name": "Pumpkinseed Sunfish",
-            "scientific_name": "Lepomis gibbosus",
-            "average_length_cm": 15,
-            "native": false,
-            "type": "sunfish",
-            "habitat": "warm ponds and lakes",
             "order": 5
         },
         {
             "name": "Bluegill",
-            "scientific_name": "Lepomis macrochirus",
-            "average_length_cm": 18,
-            "native": false,
-            "type": "sunfish",
-            "habitat": "warm ponds and lakes",
             "order": 6
         },
         {
             "name": "Yellow Perch",
-            "scientific_name": "Perca flavescens",
-            "average_length_cm": 20,
-            "native": false,
-            "type": "perch",
-            "habitat": "lakes and reservoirs",
             "order": 7
         },
         {
             "name": "Chiselmouth",
-            "scientific_name": "Acrocheilus alutaceus",
-            "average_length_cm": 22,
-            "native": true,
-            "type": "minnow",
-            "habitat": "rivers and lakes",
             "order": 8
         },
         {
             "name": "Tui Chub",
-            "scientific_name": "Siphateles bicolor",
-            "average_length_cm": 23,
-            "native": true,
-            "type": "minnow",
-            "habitat": "lakes and slow rivers",
             "order": 9
         },
         {
             "name": "Peamouth",
-            "scientific_name": "Mylocheilus caurinus",
-            "average_length_cm": 25,
-            "native": true,
-            "type": "minnow",
-            "habitat": "rivers and lakes",
             "order": 10
         },
         {
             "name": "Brown Bullhead",
-            "scientific_name": "Ameiurus nebulosus",
-            "average_length_cm": 28,
-            "native": false,
-            "type": "catfish",
-            "habitat": "warm ponds and lakes",
             "order": 11
         },
         {
             "name": "Black Crappie",
-            "scientific_name": "Pomoxis nigromaculatus",
-            "average_length_cm": 28,
-            "native": false,
-            "type": "crappie",
-            "habitat": "lakes and reservoirs",
             "order": 12
         },
         {
             "name": "White Crappie",
-            "scientific_name": "Pomoxis annularis",
-            "average_length_cm": 29,
-            "native": false,
-            "type": "crappie",
-            "habitat": "lakes and reservoirs",
             "order": 13
         },
         {
             "name": "Brook Trout",
-            "scientific_name": "Salvelinus fontinalis",
-            "average_length_cm": 30,
-            "native": false,
-            "type": "trout",
-            "habitat": "cold mountain streams and lakes",
             "order": 14
         },
         {
             "name": "Mountain Whitefish",
-            "scientific_name": "Prosopium williamsoni",
-            "average_length_cm": 30,
-            "native": true,
-            "type": "whitefish",
-            "habitat": "cold rivers such as the Deschutes",
             "order": 15
         },
         {
             "name": "Kokanee Salmon",
-            "scientific_name": "Oncorhynchus nerka",
-            "average_length_cm": 33,
-            "native": false,
-            "type": "salmon",
-            "habitat": "deep cold lakes such as Odell and Wickiup",
             "order": 16
         },
         {
             "name": "Redband Trout",
-            "scientific_name": "Oncorhynchus mykiss gairdneri",
-            "average_length_cm": 35,
-            "native": true,
-            "type": "trout",
-            "habitat": "Deschutes and Crooked River systems",
             "order": 17
         },
         {
             "name": "Smallmouth Bass",
-            "scientific_name": "Micropterus dolomieu",
-            "average_length_cm": 36,
-            "native": false,
-            "type": "bass",
-            "habitat": "Deschutes River and Prineville Reservoir",
             "order": 18
         },
         {
             "name": "Rainbow Trout",
-            "scientific_name": "Oncorhynchus mykiss",
-            "average_length_cm": 38,
-            "native": false,
-            "type": "trout",
-            "habitat": "rivers, streams, and stocked lakes",
             "order": 19
         },
         {
             "name": "Largemouth Bass",
-            "scientific_name": "Micropterus salmoides",
-            "average_length_cm": 42,
-            "native": false,
-            "type": "bass",
-            "habitat": "warm lakes and reservoirs",
             "order": 20
         },
         {
             "name": "Walleye",
-            "scientific_name": "Sander vitreus",
-            "average_length_cm": 45,
-            "native": false,
-            "type": "perch",
-            "habitat": "large reservoirs",
             "order": 21
         },
         {
             "name": "Brown Trout",
-            "scientific_name": "Salmo trutta",
-            "average_length_cm": 46,
-            "native": false,
-            "type": "trout",
-            "habitat": "Deschutes River and cold lakes",
             "order": 22
         },
         {
             "name": "Common Carp",
-            "scientific_name": "Cyprinus carpio",
-            "average_length_cm": 48,
-            "native": false,
-            "type": "carp",
-            "habitat": "warm lakes and slow rivers",
             "order": 23
         },
         {
             "name": "Lake Whitefish",
-            "scientific_name": "Coregonus clupeaformis",
-            "average_length_cm": 50,
-            "native": false,
-            "type": "whitefish",
-            "habitat": "deep cold lakes such as Odell Lake",
             "order": 24
         },
         {
             "name": "Channel Catfish",
-            "scientific_name": "Ictalurus punctatus",
-            "average_length_cm": 52,
-            "native": false,
-            "type": "catfish",
-            "habitat": "warm lakes and reservoirs",
             "order": 25
         },
         {
             "name": "Bull Trout",
-            "scientific_name": "Salvelinus confluentus",
-            "average_length_cm": 55,
-            "native": true,
-            "type": "trout",
-            "habitat": "cold clean rivers and streams",
             "order": 26
         },
         {
             "name": "Coho Salmon",
-            "scientific_name": "Oncorhynchus kisutch",
-            "average_length_cm": 60,
-            "native": true,
-            "type": "salmon",
-            "habitat": "Deschutes River",
             "order": 27
         },
         {
             "name": "Lake Trout",
-            "scientific_name": "Salvelinus namaycush",
-            "average_length_cm": 65,
-            "native": false,
-            "type": "trout",
-            "habitat": "deep cold lakes",
             "order": 28
         },
         {
             "name": "Steelhead",
-            "scientific_name": "Oncorhynchus mykiss irideus",
-            "average_length_cm": 75,
-            "native": true,
-            "type": "trout",
-            "habitat": "Deschutes River",
             "order": 29
         },
         {
             "name": "Chinook Salmon",
-            "scientific_name": "Oncorhynchus tshawytscha",
-            "average_length_cm": 90,
-            "native": true,
-            "type": "salmon",
-            "habitat": "Deschutes River",
             "order": 30
         }
     ]
