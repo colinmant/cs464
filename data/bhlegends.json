@@ -1,7 +1,7 @@
 {
     "title": "Brawlhalla Legends",
     "description": "Put the legends in order by chronological order they were added to the Game",
-    "legends": [
+    "items": [
         {
             "id": 1,
             "name": "Bodvar"
