@@ -41,7 +41,23 @@ This will download all the packages needed to run the project.
 
 ---
 
-## Step 3: Run the Development Server
+## Step 3: Set Up Supabase
+
+To run a local Supabase database for testing and development, you need the following prerequisite:
+
+- A Docker daemon installed (Go to [docker.com](https://www.docker.com/) and "Download Docker Desktop" for the easiest setup)
+
+With Docker installed, run the following command at the root of this project to setup the database:
+
+```bash
+npm run db:setup
+```
+
+This will pull the required docker container, start it with the proper configuration, and seed it with the data in `/data`.
+
+---
+
+## Step 4: Run the Development Server
 
 Start the app with:
 
@@ -51,7 +67,7 @@ npm run dev
 
 ---
 
-## Step 4: Open the App in Your Browser
+## Step 5: Open the App in Your Browser
 
 Once the server starts, you should see a message like:
 
