@@ -32,6 +32,6 @@ const env = {
 };
 
 const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
-const child = spawn(npmCmd, ["run", targetScript], { stdio: "inherit", env });
+const child = spawn(npmCmd, ["run", targetScript], { stdio: "inherit", env, shell: process.platform === "win32" ? true : undefined });
 
 child.on("exit", (code) => process.exit(code ?? 1));
