@@ -53,7 +53,7 @@ With Docker installed, run the following command at the root of this project to 
 npm run db:setup
 ```
 
-This will pull the required docker container, start it with the proper configuration, and seed it with the data in `/data`.
+This will pull the required docker container, start it with the proper configuration, and seed it with the data in `/data`. Please note that this process may take several minutes, especially on first setup, so please be patient with it.
 
 ---
 
