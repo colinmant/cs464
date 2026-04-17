@@ -20,11 +20,17 @@ export default function Home() {
   const { title, description, items } = datasets[selectedIndex];
 
   const [shuffledItems, setShuffledItems] = useState<DatasetItem[]>([]);
+  const [IsDragging, SetIsDragging] = useState(false)
 
   useEffect(() => {
     const shuffled = [...items].sort(() => Math.random() - 0.5);
     setShuffledItems(shuffled);
   }, [items]);
+
+  useEffect(() => {
+    document.body.style.cursor = IsDragging ? 'grabbing' : 'grab';
+    return () => { document.body.style.cursor = ''; };
+  }, [IsDragging]);
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, px: 2 }}>
@@ -60,7 +66,9 @@ export default function Home() {
             key={item.name}
             value={item}
             as="div"
-            style={{ position: 'relative', cursor: 'grab' }}
+            onDragStart={() => SetIsDragging(true)}
+            onDragEnd={() => SetIsDragging(false)}
+            style={{ position: 'relative', cursor: IsDragging ? 'grabbing' : 'grab' }}
           >
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
