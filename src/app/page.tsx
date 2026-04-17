@@ -12,11 +12,11 @@ import birds from '../../data/bird_population.json';
 import fish from '../../data/fish.json';
 import planets from '../../data/planets.json';
 
-import { Dataset, DatasetItem } from '@/types/data';
+import { DatasetResponse, DatasetItem } from '@/types/data';
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const datasets: Dataset[] = [birds, fish, planets]
+  const datasets: DatasetResponse[] = [birds, fish, planets]
   const { title, description, items } = datasets[selectedIndex];
 
   const [shuffledItems, setShuffledItems] = useState<DatasetItem[]>([]);
@@ -60,7 +60,7 @@ export default function Home() {
             key={item.name}
             value={item}
             as="div"
-            style={{ position: 'relative' }}
+            style={{ position: 'relative', cursor: 'grab' }}
           >
             <Card variant="outlined">
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
