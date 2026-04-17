@@ -1,21 +1,24 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Box, Typography, Card, CardContent, Stack,
   Select, MenuItem, FormControl, InputLabel
 } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
-
-// sample data
-import birds from '../../data/bird_population.json';
-import fish from '../../data/fish.json';
-import planets from '../../data/planets.json';
-
 import { DataFile } from '@/types/data';
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const datasets: DataFile[] = [birds, fish, planets]
+  const [datasets, setDatasets] = useState<DataFile[]>([]);
+
+  useEffect(() => {
+    fetch('/api/data')
+      .then(res => res.json())
+      .then(({ datasets }) => setDatasets(Object.values(datasets)));
+  }, []);
+
+  if (datasets.length === 0) return null;
+
   const { title, description, items } = datasets[selectedIndex];
 
   return (
@@ -37,8 +40,7 @@ export default function Home() {
 
       {/* Title & description from the JSON */}
       <Typography variant="h4" gutterBottom>{title}</Typography>
-      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>        {description}
-      </Typography>
+      <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>{description}</Typography>
 
       {/* Item cards */}
       <Stack spacing={1}>
