@@ -72,6 +72,11 @@ export default function Home() {
               Check Order
             </Button>
           </Box>
+          {checked && directions.size === 0 && (
+            <Typography color="success" sx={{ mb: 2, textAlign: 'center' }}>
+              Congratulations, the order is correct!
+            </Typography>
+          )}
           {checked && directions.size > 0 && (
             <Typography color="error" sx={{ mb: 2, textAlign: 'center' }}>
               {directions.size} {directions.size === 1 ? 'item is' : 'items are'} out of place
