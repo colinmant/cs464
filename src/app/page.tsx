@@ -77,11 +77,13 @@ export default function Home() {
         Check Order
       </Button>
 
-      {feedback && (
-        <Alert severity={feedback.severity} sx={{ mb: 3 }}>
-          {feedback.message}
-        </Alert>
-      )}
+      <Box sx={{ minHeight: 48, mb: 3 }}>
+        {feedback && (
+          <Alert severity={feedback.severity}>
+            {feedback.message}
+          </Alert>
+        )}
+      </Box>
 
       {/* Title & description from the JSON */}
       <Typography variant="h4" gutterBottom>{title}</Typography>
