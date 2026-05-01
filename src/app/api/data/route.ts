@@ -1,6 +1,8 @@
 import { Dataset, DatasetDatabaseItem } from '@/types/data'
 import { getSupabaseClient } from '@/lib/supabase'
 
+export { POST } from './POST'
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const name = searchParams.get('name')
