@@ -23,6 +23,21 @@ export default function Home() {
     message: string
   } | null>(null);
 
+  const statusColors = {
+    correct: '#e6f4ea',
+    close: '#fff9e6',
+    wrong: '#f0f0f0',
+    default: 'white',
+  };
+
+  const getItemStatus = (item: DatasetItem, index: number) => {
+    if (!feedback) return 'default';
+    const diff = Math.abs(item.order - (index + 1));
+    if (diff === 0) return 'correct';
+    if (diff <= 2) return 'close';
+    return 'wrong';
+  };
+
   useEffect(() => {
     fetch("/api/titles")
       .then((r: Response) => r.json())
@@ -132,7 +147,14 @@ export default function Home() {
             onDragStart={() => setIsDragging(true)}
             onDragEnd={() => setIsDragging(false)}
           >
-            <Card variant="outlined" sx={{ cursor: isDragging ? 'grabbing' : 'grab' }}>
+            <Card
+              variant="outlined"
+              sx={{
+                cursor: isDragging ? 'grabbing' : 'grab',
+                backgroundColor: statusColors[getItemStatus(item, shuffledItems.indexOf(item))],
+                transition: 'background-color 0.3s ease',
+              }}
+            >
               <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
                 <DragHandleIcon color="action" />
                 <Typography variant="body1">{item.name}</Typography>
