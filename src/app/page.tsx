@@ -4,18 +4,13 @@ import {
   Box, Typography, Card, CardContent,
   Select, MenuItem, FormControl, InputLabel,
   Button, Alert
-  Select, MenuItem, FormControl, InputLabel, Button
 } from '@mui/material';
 import DragHandleIcon from '@mui/icons-material/DragHandle';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import { Reorder } from 'motion/react';
 
-import { Dataset, DatasetItem } from '@/types/data';
-import { getItemDirections } from '@/lib/verifyOrder';
+import { Dataset, DatasetItem, DatasetMeta } from '@/types/data';
 
 export default function Home() {
-  const [datasets, setDatasets] = useState<Dataset[]>([]);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dataset, setDataset] = useState<Dataset | null>(null)
   // const { title, description, items } = datasets[selectedIndex];
@@ -48,16 +43,6 @@ export default function Home() {
       .then((r: Response) => r.json())
       .then((data: DatasetMeta[]) => setDatasetMeta(data))
   }, [])
-  const [checked, setChecked] = useState(false);
-
-  useEffect(() => {
-    fetch('/api/data')
-      .then((res) => res.json())
-      .then((json) => {
-        const loaded: Dataset[] = Object.values(json.datasets);
-        setDatasets(loaded);
-      });
-  }, []);
 
   useEffect(() => {
     if (dataset) {
@@ -131,29 +116,13 @@ export default function Home() {
         )}
       </Box>
 
-      {/* Title & description */}
-      {selected && (
-        <>
-          {
+      {/* Title & description from the JSON */}
+      {
         dataset ?
           <>
-            <Typography variant="h4" gutterBottom>{dataset.selected.title}</Typography>
-                <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-      
-            {dataset.selected.description}
-                </Typography>
-          <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-            <Button
-              variant="contained"
-              color="success"
-              onClick={() => setChecked(true)}
-            >
-              Check Order
-            </Button>
-          </Box>
-          {checked && directions.size > 0 && (
-            <Typography color="error" sx={{ mb: 2, textAlign: 'center' }}>
-              {directions.size} {directions.size === 1 ? 'item is' : 'items are'} out of place
+            <Typography variant="h4" gutterBottom>{dataset.title}</Typography>
+            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
+              {dataset.description}
             </Typography>
           </>
 
@@ -161,9 +130,6 @@ export default function Home() {
           <h3> loading... </h3>
       }
 
-          )}
-        </>
-      )}
 
       {/* Item cards */}
       <Reorder.Group
@@ -172,7 +138,7 @@ export default function Home() {
         onReorder={handleReorder}
         style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
       >
-        {shuffledItems.map((item, index) => (
+        {shuffledItems.map((item) => (
           <Reorder.Item
             key={item.order}
             value={item}
