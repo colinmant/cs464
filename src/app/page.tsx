@@ -1,34 +1,21 @@
 'use client';
 import { useState, useEffect } from 'react';
-import {
-  Box, Typography, Card, CardContent,
-  Select, MenuItem, FormControl, InputLabel,
-  Button, Alert
-} from '@mui/material';
-import DragHandleIcon from '@mui/icons-material/DragHandle';
-import { Reorder } from 'motion/react';
-
+import { Box, Button } from '@mui/material';
 import { Dataset, DatasetItem, DatasetMeta } from '@/types/data';
+import DatasetPicker from '@/components/DatasetPicker';
+import FeedbackAlert from '@/components/FeedbackAlert';
+import DatasetHeader from '@/components/DatasetHeader';
+import DraggableDatasetItems from '@/components/DraggableDatasetItems';
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
-  const [dataset, setDataset] = useState<Dataset | null>(null)
-  // const { title, description, items } = datasets[selectedIndex];
-
+  const [dataset, setDataset] = useState<Dataset | null>(null);
   const [shuffledItems, setShuffledItems] = useState<DatasetItem[]>([]);
-  const [isDragging, setIsDragging] = useState(false);
-  const [datasetMeta, setDatasetMeta] = useState<DatasetMeta[]>([])
+  const [datasetMeta, setDatasetMeta] = useState<DatasetMeta[]>([]);
   const [feedback, setFeedback] = useState<{
-    severity: 'success' | 'info',
-    message: string
+    severity: 'success' | 'info';
+    message: string;
   } | null>(null);
-
-  const statusColors = {
-    correct: '#e6f4ea',
-    close: '#fff9e6',
-    wrong: '#f0f0f0',
-    default: 'white',
-  };
 
   const getItemStatus = (item: DatasetItem, index: number) => {
     if (!feedback) return 'default';
@@ -39,10 +26,10 @@ export default function Home() {
   };
 
   useEffect(() => {
-    fetch("/api/titles")
+    fetch('/api/titles')
       .then((r: Response) => r.json())
-      .then((data: DatasetMeta[]) => setDatasetMeta(data))
-  }, [])
+      .then((data: DatasetMeta[]) => setDatasetMeta(data));
+  }, []);
 
   useEffect(() => {
     if (dataset) {
@@ -50,17 +37,15 @@ export default function Home() {
       setShuffledItems(shuffled);
       setFeedback(null);
     }
-
   }, [dataset]);
 
   useEffect(() => {
-    if (datasetMeta.length > selectedIndex){
-    fetch(`/api/data?name=${datasetMeta[selectedIndex].dataset_slug}`)
-      .then((r: Response) => r.json())
-      .then((data: Dataset) => setDataset(data))
+    if (datasetMeta.length > selectedIndex) {
+      fetch(`/api/data?name=${datasetMeta[selectedIndex].dataset_slug}`)
+        .then((r: Response) => r.json())
+        .then((data: Dataset) => setDataset(data));
     }
-
-  }, [selectedIndex, datasetMeta])
+  }, [selectedIndex, datasetMeta]);
 
   const handleCheckOrder = () => {
     if (dataset) {
@@ -71,12 +56,12 @@ export default function Home() {
       if (correctCount === dataset.items.length) {
         setFeedback({
           severity: 'success',
-          message: 'Correct! You solved the puzzle.'
+          message: 'Correct! You solved the puzzle.',
         });
       } else {
         setFeedback({
           severity: 'info',
-          message: `${correctCount} of ${dataset.items.length} items are in the correct position.`
+          message: `${correctCount} of ${dataset.items.length} items are in the correct position.`,
         });
       }
     }
@@ -89,80 +74,23 @@ export default function Home() {
 
   return (
     <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, px: 2 }}>
-
-      {/* Dropdown */}
-      <FormControl fullWidth sx={{ mb: 3 }}>
-        <InputLabel>Select a dataset</InputLabel>
-        <Select
-          value={selectedIndex}
-          label="Select a dataset"
-          onChange={(e) => setSelectedIndex(Number(e.target.value))}
-        >
-          {datasetMeta.map((ds, i) => (
-            <MenuItem key={i} value={i}>{ds.title}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+      <DatasetPicker
+        selectedIndex={selectedIndex}
+        datasetMeta={datasetMeta}
+        onSelect={setSelectedIndex}
+      />
 
       <Button variant="contained" onClick={handleCheckOrder} sx={{ mb: 2 }}>
         Check Order
       </Button>
 
-      <Box sx={{ minHeight: 48, mb: 3 }}>
-        {feedback && (
-          <Alert severity={feedback.severity}>
-            {feedback.message}
-          </Alert>
-        )}
-      </Box>
-
-      {/* Title & description from the JSON */}
-      {
-        dataset ?
-          <>
-            <Typography variant="h4" gutterBottom>{dataset.title}</Typography>
-            <Typography variant="body1" color="text.secondary" sx={{ mb: 3 }}>
-              {dataset.description}
-            </Typography>
-          </>
-
-          :
-          <h3> loading... </h3>
-      }
-
-
-      {/* Item cards */}
-      <Reorder.Group
-        as="div"
-        values={shuffledItems}
+      <FeedbackAlert feedback={feedback} />
+      <DatasetHeader dataset={dataset} />
+      <DraggableDatasetItems
+        shuffledItems={shuffledItems}
         onReorder={handleReorder}
-        style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
-      >
-        {shuffledItems.map((item) => (
-          <Reorder.Item
-            key={item.order}
-            value={item}
-            as="div"
-            style={{ position: 'relative' }}
-            onDragStart={() => setIsDragging(true)}
-            onDragEnd={() => setIsDragging(false)}
-          >
-            <Card
-              variant="outlined"
-              sx={{
-                cursor: isDragging ? 'grabbing' : 'grab',
-                backgroundColor: statusColors[getItemStatus(item, shuffledItems.indexOf(item))],
-                transition: 'background-color 0.3s ease',
-              }}
-            >
-              <CardContent sx={{ display: 'flex', alignItems: 'center', gap: 2, py: '12px !important' }}>
-                <DragHandleIcon color="action" />
-                <Typography variant="body1">{item.name}</Typography>
-              </CardContent>
-            </Card>
-          </Reorder.Item>
-        ))}
-      </Reorder.Group>
+        getItemStatus={getItemStatus}
+      />
     </Box>
   );
-};
+}
