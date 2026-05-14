@@ -67,6 +67,14 @@ export default function Home() {
     }
   };
 
+  const handleShuffleData = () => {
+    if (dataset) {
+      const shuffled = [...dataset.items].sort(() => Math.random() - 0.5);
+      setShuffledItems(shuffled);
+      setFeedback(null);
+    }
+  };
+
   const handleReorder = (newOrder: DatasetItem[]) => {
     setShuffledItems(newOrder);
     setFeedback(null);
@@ -80,9 +88,14 @@ export default function Home() {
         onSelect={setSelectedIndex}
       />
 
-      <Button variant="contained" onClick={handleCheckOrder} sx={{ mb: 2 }}>
-        Check Order
-      </Button>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+        <Button variant="contained" onClick={handleCheckOrder}>
+          Check Order
+        </Button>
+        <Button variant="contained" onClick={handleShuffleData}>
+          Shuffle
+        </Button>
+      </Box>
 
       <FeedbackAlert feedback={feedback} />
       <DatasetHeader dataset={dataset} />
