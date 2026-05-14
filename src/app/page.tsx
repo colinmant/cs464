@@ -1,43 +1,21 @@
 'use client';
+
 import { useState, useEffect } from 'react';
-import { Box, Button } from '@mui/material';
-import { Dataset, DatasetItem, DatasetMeta } from '@/types/data';
+import { Box } from '@mui/material';
+import { Dataset, DatasetMeta } from '@/types/data';
 import DatasetPicker from '@/components/DatasetPicker';
-import FeedbackAlert from '@/components/FeedbackAlert';
-import DatasetHeader from '@/components/DatasetHeader';
-import DraggableDatasetItems from '@/components/DraggableDatasetItems';
+import PuzzleGame from '@/components/PuzzleGame';
 
 export default function Home() {
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [dataset, setDataset] = useState<Dataset | null>(null);
-  const [shuffledItems, setShuffledItems] = useState<DatasetItem[]>([]);
   const [datasetMeta, setDatasetMeta] = useState<DatasetMeta[]>([]);
-  const [feedback, setFeedback] = useState<{
-    severity: 'success' | 'info';
-    message: string;
-  } | null>(null);
-
-  const getItemStatus = (item: DatasetItem, index: number) => {
-    if (!feedback) return 'default';
-    const diff = Math.abs(item.order - (index + 1));
-    if (diff === 0) return 'correct';
-    if (diff <= 2) return 'close';
-    return 'wrong';
-  };
 
   useEffect(() => {
     fetch('/api/titles')
       .then((r: Response) => r.json())
       .then((data: DatasetMeta[]) => setDatasetMeta(data));
   }, []);
-
-  useEffect(() => {
-    if (dataset) {
-      const shuffled = [...dataset.items].sort(() => Math.random() - 0.5);
-      setShuffledItems(shuffled);
-      setFeedback(null);
-    }
-  }, [dataset]);
 
   useEffect(() => {
     if (datasetMeta.length > selectedIndex) {
