@@ -3,16 +3,14 @@ import { getSupabaseClient } from "@/lib/supabase";
 import { NextRequest } from "next/server";
 
 export async function PATCH(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+  request: NextRequest) {
   try {
-    const { slug } = params;
+    const { searchParams } = new URL(request.url)
+    const slug = searchParams.get('slug')
     const supabase = getSupabaseClient();
     
     const PartialData = Data.partial();
     const body = PartialData.parse(await request.json());
-
     if (Object.keys(body).length === 0) {
       return Response.json({ error: "No update fields provided" }, { status: 400 });
     }
@@ -28,7 +26,6 @@ export async function PATCH(
     }
 
     const datasetId = existingDataset.id;
-
     const datasetUpdates: any = {
       updated_at: new Date().toISOString(),
     };
@@ -50,7 +47,7 @@ export async function PATCH(
       }
 
       await supabase.from('dataset_items').delete().eq('dataset_id', datasetId);
-      
+
       const itemsToInsert = body.items.map(item => ({
         dataset_id: datasetId,
         item_name: item.name,
