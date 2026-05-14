@@ -3,15 +3,13 @@ import { getSupabaseClient } from "@/lib/supabase";
 import { NextRequest } from "next/server";
 
 export async function PUT(
-  request: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+  request: NextRequest) {
   try {
-    const { slug } = params;
-    const body = Data.parse(await request.json());
+    const { searchParams } = new URL(request.url)
+    const slug = searchParams.get('slug')
     const supabase = getSupabaseClient();
-
     const orderSet = new Set(body.items.map(i => i.order));
+    
     if (orderSet.size !== body.items.length) {
       return Response.json({ error: "Item order values must be unique" }, { status: 400 });
     }
