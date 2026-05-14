@@ -20,10 +20,10 @@ export async function DELETE(
     }
 
     if (!data || data.length === 0) {
-      return { status: 404, message: `Dataset with slug ${slug} not found.`}
+      return Response.json({ message: `Dataset with slug ${slug} not found.` }, { status: 404 })
     }
 
-    return Response.json({ message: "Successfully deleted", deletedItem: data[0]}, { status: 200 })
+    return Response.json({ message: "Successfully deleted", deletedItem: data[0] }, { status: 200 })
   }
   return Response.json({ message: "No slug provided" }, { status: 400 })
 }
